@@ -1,7 +1,8 @@
 const AppError = require("../AppError");
 
 const errorHandler = (error, req, res, next) => {
-    console.log(error);
+
+    console.log(error, "this");
 
     if (error.name === "ValidationError") {
         return res.status(400).send({

@@ -23,14 +23,12 @@ const getUser = () => undefined;
 const getSubscription = () => undefined;
 
 app.get("/test", tryCatch(async (req, res) => {
-
   const user = getUser();
   if (!user) {
     throw new Error("User not found");
   }
   return res.status(200).json({ success: true });
 })
-
 );
 
 const schema = Joi.object({
@@ -47,6 +45,7 @@ app.post("/login", tryCatch(async (req, res) => {
 })
 );
 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -54,6 +53,10 @@ app.use('/users', usersRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // error handler
 app.use(function (err, req, res, next) {
